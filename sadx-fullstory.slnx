@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="sadx-fullstory/sadx-fullstory.vcxproj" Id="48a43295-cb26-4fc3-aeb2-a763c4a3abb5" />
+</Solution>
