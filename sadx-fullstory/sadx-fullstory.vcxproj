@@ -74,7 +74,7 @@
     <OutDir>E:\SteamLibrary\steamapps\common\Sonic Adventure DX\mods\Game Overhaul\Full Story</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>E:\SteamLibrary\steamapps\common\Sonic Adventure DX\mods\Misc\Full Story</OutDir>
+    <OutDir>E:\SteamLibrary\steamapps\common\Sonic Adventure DX\mods\Gameplay\Full Story</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -103,6 +103,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,21 +146,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="Include\d3d8types.h" />
+    <ClInclude Include="Include\framework.h" />
     <ClInclude Include="Data.h" />
-    <ClInclude Include="ini.h" />
-    <ClInclude Include="INIReader.h" />
-    <ClInclude Include="json.hpp" />
+    <ClInclude Include="Include\INIReader.h" />
+    <ClInclude Include="Include\json.hpp" />
+    <ClInclude Include="Include\ini.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cutscenes\ev001C_s_beforechaos6.cpp" />
+    <ClCompile Include="Cutscenes\ev006A_a_escapecarrier.cpp" />
+    <ClCompile Include="Cutscenes\ev0091_k_leavepastsecond.cpp" />
+    <ClCompile Include="Cutscenes\ev0008_s_chaos1.cpp" />
+    <ClCompile Include="Cutscenes\ev001A_s_eggmantakesbirdie.cpp" />
+    <ClCompile Include="Cutscenes\ev0032_t_meetingsonic.cpp" />
+    <ClCompile Include="Cutscenes\ev0039_t_beforechaos4.cpp" />
+    <ClCompile Include="Cutscenes\ev004D_t_missile.cpp" />
+    <ClCompile Include="Cutscenes\ev0099_k_beforechaos6.cpp" />
+    <ClCompile Include="Cutscenes\ev00B8_e_emeraldcoast.cpp" />
+    <ClCompile Include="Cutscenes\ev00D1_b_stationsquare.cpp" />
+    <ClCompile Include="Cutscenes\ev00F3_l_knuckles.cpp" />
+    <ClCompile Include="Cutscenes\ev00F9_l_snoozecruise.cpp" />
+    <ClCompile Include="Cutscenes\ev0122_k_outsideskydeck.cpp" />
+    <ClCompile Include="Include\ini.cpp" />
     <ClCompile Include="Objects.cpp" />
     <ClCompile Include="StageOnFrames.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Data.cpp" />
-    <ClCompile Include="ini.cpp" />
-    <ClCompile Include="INIReader.cpp" />
+    <ClCompile Include="Include\INIReader.cpp" />
     <ClCompile Include="Mod.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -169,9 +184,7 @@
     </ClCompile>
     <ClCompile Include="Progression.cpp" />
     <ClCompile Include="Stage.cpp" />
-    <ClCompile Include="Cutscene.cpp" />
     <ClCompile Include="Trampoline.cpp" />
-    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

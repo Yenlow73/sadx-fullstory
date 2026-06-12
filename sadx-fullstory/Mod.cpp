@@ -2,46 +2,72 @@
 
 std::string modpath;
 
-bool dreamcastModLoaded = false;
+void CheckMods()
+{
+	modsEnabled.aventuraDeSonic = GetModuleHandle(L"ads1.dll") != NULL || GetModuleHandle(L"ptbr21.dll") != NULL;
+	modsEnabled.dreamcastConversion = GetModuleHandle(L"DCMods_Main.dll") != NULL;
+	modsEnabled.betterTailsAI = GetModuleHandle(L"SADX-Better-Tails-AI.dll") != NULL;
 
-extern "C" {
+	HMODULE lanternModule = GetModuleHandle(L"sadx-dc-lighting.dll");
+		
+	if (lanternModule == nullptr) return;
+	
+	for (const auto& lanternFunction : lanternFunctions) 
+	{
+        *lanternFunction.target = GetProcAddress(lanternModule, lanternFunction.name);
+    }
 
-	__declspec( dllexport ) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
+	modsEnabled.lanternEngine = true;
+}
+
+void SetLogo(const HelperFunctions& helper)
+{
+	if (!settings.titleLogoEnabled) return;
+
+	if (modsEnabled.dreamcastConversion)
+	{
+		helper.ReplaceFile("system\\AVA_GTITLE0_DC_HD.PVM", "system\\AVA_GTITLE0_DC_HD.PVMX");
+	}
+	else
+	{
+		helper.ReplaceFile("system\\AVA_GTITLE0_E.PVM", "system\\textures\\AVA_GTITLE0_E.PVM");
+	}
+}
+
+void SetCustomCutscenes()
+{
+	for (auto const& [name, func] : sceneFunctions)
+    {
+        CutsceneDataList[scene[name]]->Function = func;
+    }
+
+	CutsceneDataList[scene["Scene_Final_KnucklesAtTheMasterEmerald"]]->Textures = texTbl_ev00F3;
+	CutsceneDataList[scene["Scene_Tails_EggmanLaunchesMissile"]]->Textures = texTbl_ev004D;
+}
+
+extern "C" 
+{
+	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
 	{
 		modpath = path;
 
-		dreamcastModLoaded = GetModuleHandle(L"DCMods_Main.dll") != NULL;
+		ApplyVisualSettings();
+		CheckMods();
+		SetLogo(helperFunctions);
 
-		ReadConfig(false);
-
-		if (TitleLogoEnabled)
-		{
-			if (dreamcastModLoaded)
-			{
-				helperFunctions.ReplaceFile("system\\AVA_GTITLE0_DC_HD.PVM", "system\\textures\\AVA_GTITLE0_DC_HD.PVMX");
-			}
-			else
-			{
-				helperFunctions.ReplaceFile("system\\AVA_GTITLE0_E.PVM", "system\\textures\\AVA_GTITLE0_E.PVM");
-			}		
-		}
-
-		// Load Modified Cutscenes
-		CutsceneDataList[0x004D]->Function = ev004D_t_missile;
-		CutsceneDataList[0x004D]->Textures = texTbl_ev004D;
-		CutsceneDataList[0x00F9]->Function = ev00F9_l_snoozecruise;
+		LoadEnums();
+		LoadFieldStages();
+		LoadSettingStages();
+		SetCustomCutscenes();
 
 		Init_Progression();
 		Init_Stages();
+		Init_StageOnFrames();
 	}
 	
-	__declspec(dllexport) void __cdecl OnFrame()
+	__declspec(dllexport) void __cdecl OnFrame(const HelperFunctions& helperFunctions)
 	{
 		SetStageOnFrames();
-		CheckCompletion();
-
-		if (GameState == 16)
-			PauseMenuFix();
 	}
 
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer };

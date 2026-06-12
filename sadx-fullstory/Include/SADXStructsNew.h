@@ -1718,7 +1718,7 @@ struct SEQUENCE
 	__int16 seqno;
 	__int16 sec;
 	__int16 nextsec;
-	unsigned __int16 stage;
+	unsigned __int16 diffuse;
 	unsigned __int16 destination;
 };
 
@@ -2093,7 +2093,7 @@ struct ADVPOS
 // StartPosition
 struct GM_START_POSANG
 {
-	__int16 stage;
+	__int16 diffuse;
 	__int16 act;
 	NJS_POINT3 p;
 	int angy;
@@ -4256,7 +4256,7 @@ struct SEQ_DATA
 	Sint16 seqno;
 	Sint16 sec;
 	Sint16 nextsec;
-	Uint16 stage;
+	Uint16 diffuse;
 	Uint16 destination;
 };
 

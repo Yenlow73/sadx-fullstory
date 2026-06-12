@@ -270,17 +270,17 @@ task* eggmoble;
 task* zero;
 
 /*Enable various unused code:
-* EV000B: Unused dust effect
-* EV0009: There's a skip in the camera sequence at the beginning due to a text box that was removed after the original JP version. (EV_Msg- functions force the event to wait 20 frames).
+* ev000B_s_beforechaos4: Unused dust effect
+* ev0009_s_aftercasinopolis: There's a skip in the camera sequence at the beginning due to a text box that was removed after the original JP version. (EV_Msg- functions force the event to wait 20 frames).
 			Set to 1 to fix the camera sequence.
 			Set to 2 to do the above as well as restore the text box (As "?" to be compatible with all languages).
-* EV001A: Tails and Gamma aren't created properly (Tried to get objects on the same frame as their creation)
-* EV0039: Tails' version of EV000B.
-* EV003E: Remove the Jet Anklet instead of the Rhythm Badge in Tails' flashback and enable two COverlaySetPriority calls.
-* EV004B: Tails' version of EV001A.
-* EV0080: Knuckles has an eyelid animation when he gets woken up. The line points to "0" instead of him though, so it doesn't do anything.
-* EV0091: Knuckles does an animation when viewing the small Egg Carrier inside the emerald but it can't be seen normally because he slides off the pedestal and out of view before it can start.
-* EV009A: Knuckles has mouth movement during "I still can't figure out that creepy monster." that isn't seen because the running animation he's doing doesn't support mouth movement.
-* EV00C7: Gamma's ending spawns and has code related to Amy's flicky but it's invisible.
+* ev001A_s_eggmantakesbirdie: Tails and Gamma aren't created properly (Tried to get objects on the same frame as their creation)
+* ev0039_t_beforechaos4: Tails' version of EV000B.
+* ev003E_t_flashback: Remove the Jet Anklet instead of the Rhythm Badge in Tails' flashback and enable two COverlaySetPriority calls.
+* ev004B_t_eggmantakesbirdie: Tails' version of EV001A.
+* ev0080_k_intro: Knuckles has an eyelid animation when he gets woken up. The line points to "0" instead of him though, so it doesn't do anything.
+* ev0091_k_leavepastsecond: Knuckles does an animation when viewing the small Egg Carrier inside the emerald but it can't be seen normally because he slides off the pedestal and out of view before it can start.
+* ev009A_k_glubglub: Knuckles has mouth movement during "I still can't figure out that creepy monster." that isn't seen because the running animation he's doing doesn't support mouth movement.
+* ev00C7_e_outro: Gamma's ending spawns and has code related to Amy's flicky but it's invisible.
 */
-int enableUnusedCode = 0;
+int enableUnusedCode = 1;

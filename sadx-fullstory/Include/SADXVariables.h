@@ -13,7 +13,7 @@
  // TODO: fix recap language arrays in disassembly (02BC3228)
 
 DataPointer(int, CurrentSaveSlot, 0x3B290D8);
-
+DataPointer(unsigned char, SelectedCharacter, 0x3B2A2FD);
 DataPointer(float, flt_3B18244, 0x3B18244);
 
 DataPointer(unsigned char, ValueMenu, 0x3B2C5F8);

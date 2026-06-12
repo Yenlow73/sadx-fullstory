@@ -8,15 +8,14 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
-#include "framework.h"
-#include "SADXModLoader.h"
-#include "Trampoline.h"
-#include "Utils.h"
 #include "Data.h"
-#include "json.hpp"
-#include "INIReader.h"
-#include "SADXEventFunctions.h"
-#include "SADXEventList.h"
-#include "SADXEventVariables.h"
+#include "Include/framework.h"
+#include "Include/SADXModLoader.h"
+#include "Include/Trampoline.h"
+#include "Include/json.hpp"
+#include "Include/INIReader.h"
+#include "Include/SADXEventFunctions.h"
+#include "Include/SADXEventList.h"
+#include "Include/SADXEventVariables.h"
 
 #endif //PCH_H
